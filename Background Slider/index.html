@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .__slider_modal{
+            position: fixed;
+            background-color: aqua;
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .__slider_modal div{
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            color: rgb(43, 38, 38);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+        }
+        .__slider_modal img{
+            height: 90%;
+            transition: ease-in-out 0.2s ease-in-out;
+            border-radius: 10px;
+            width: auto;
+            box-shadow: black 0px 0px 100px;
+        }
+        .__slider_modal p{
+            width: 40px;
+            height: 40px;
+            z-index: 20;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(32, 30, 30);
+            background: white;
+            border-radius: 50%;
+            transition: all ease-in-out 0.1s;
+            margin: 10px;
+        }
+        .__slider_modal p:active{
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="__slider_modal">
+        <div><i class="fa fa-times" aria-hidden="true"></i></div>
+        <p><i class="fa fa-chevron-left" aria-hidden="true"></i></p>
+        <img src="">
+        <p><i class="fa fa-chevron-right" aria-hidden="true"></i></p>
+    </div>
+    <script>
+        {
+            let imgUrls=[
+                'https://images.unsplash.com/photo-1606961947900-6722c7358f23?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
+                'https://images.unsplash.com/photo-1602617385826-3678795603e3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
+                'https://images.unsplash.com/photo-1562613758-0353a8d6c178?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80',
+                'https://images.unsplash.com/photo-1607214240122-5464f27f887f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2061&q=80',
+                'https://images.unsplash.com/photo-1607212053115-d85fa8fddde4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'
+            ];
+            let i=0;
+            let img=document.querySelector('.__slider_modal').children[2];
+            let background=document.querySelector('.__slider_modal');
+            function prev(){
+                if(i==0) return;
+                i--;
+                load(i);
+            }
+            function next(){
+                if(i==imgUrls.length-1) return;
+                i++;
+                load(i);
+            }
+            function load(i){
+                img.src=imgUrls[i];
+                background.style.background=`linear-gradient(to right bottom,rgba(0, 0, 0, 0.671),rgba(0, 0, 0, 0.61)),
+                                            url(${imgUrls[i]}) center no-repeat`;
+            }
+            load(0);
+            function closeModal(){
+                background.style.display='none';
+            }
+            document.querySelector('.__slider_modal').children[1].addEventListener('click',prev);
+            document.querySelector('.__slider_modal').children[3].addEventListener('click',next);
+            document.querySelector('.__slider_modal div').addEventListener('click',closeModal);
+            function openModal(){
+                background.style.display='flex';
+            }
+        }
+    </script>
+</body>
+</html>

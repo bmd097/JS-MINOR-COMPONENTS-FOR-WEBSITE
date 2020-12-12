@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .theme_clock{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            transition: all ease-in-out 0.3s;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            position: relative;
+        }
+        .theme_clock button{
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 19px;
+            padding: 15px 20px;
+            background: rgb(51, 47, 47);
+            color: white;
+            transition: all ease-in-out 0.15s;
+        }
+        .theme_clock button:active{
+            transform: scale(0.95);
+        }
+        .clock{
+            width: 250px;
+            height: 250px;
+            position: relative;
+            border-radius: 50%;
+            background: linear-gradient(to right bottom,rgb(230, 230, 230),rgb(233, 233, 233));
+        }
+        .clock::before{
+            content: "";
+            z-index: 177;
+            position: absolute;
+            width: 16px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: rgb(43, 38, 38);
+            border: solid white 2px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+
+        }
+        .clock .hour,.min,.sec{
+            width: 10px;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .clock .hh,.mm,.ss{
+            position: absolute;
+            bottom: 50%;
+            border-radius: 10px;
+            left:50%;
+            transform: translateX(-50%);
+        }
+        .clock .hh {
+            height: 25%;
+            width: 7px;
+            background-color: rgb(49, 44, 44);
+        }
+        .clock .mm{
+            height: 35%;
+            width: 5px;
+            background-color: rgb(100, 99, 99);
+        }
+        .clock .ss{
+            height: 57%;
+            width: 3px;
+            bottom: 37%;
+            background-color: rgb(255, 0, 55);
+        }
+        .clock .hour{
+            transform: translate(-50%,-50%) rotateZ(150deg);
+        }
+        .clock .min{
+            transform: translate(-50%,-50%) rotateZ(10deg);
+        }
+        .theme_clock .clock_dark_mode{
+            color: white;
+        }
+        .theme_clock .time{
+            padding: 20px;
+            padding-bottom: 3px;
+            font-size: 80px;
+        }
+        .theme_clock .date{
+            font-size: 20px;
+        }
+        .theme_clock .highlight{
+            font-size: 20px;
+            padding: 5px 10px;
+            color: white;
+            background: rgb(43, 40, 40);
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="theme_clock">
+        <button>Night</button>
+        <div class="clock">
+            <div class="hour">
+                <div class="hh"></div>
+            </div>
+            <div class="min">
+                <div class="mm"></div>
+            </div>
+            <div class="sec">
+                <div class="ss"></div>
+            </div>
+        </div>
+        <p class="time">6:15 AM</p>
+        <p class="date">Thursday December</p>
+    </div>
+    <script>
+        {
+            let clock=document.querySelector('.clock');
+            let currDate;
+            let time=document.querySelector('.time');
+            let date=document.querySelector('.date');
+            let nightMode=false;
+            let days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+            let months=['January','February','March','April','May',"June","July","Augest","September","October","November","December"];
+            setInterval(()=>{
+                currDate=new Date();
+                clock.children[0].style.transform=`translate(-50%,-50%) rotateZ(${(currDate.getHours()%12)*30+((currDate.getMinutes()/60)*30)}deg)`;
+                clock.children[1].style.transform=`translate(-50%,-50%) rotateZ(${currDate.getMinutes()*6+(currDate.getSeconds()/60)*6}deg)`;
+                clock.children[2].style.transform=`translate(-50%,-50%) rotateZ(${currDate.getSeconds()*6}deg)`;
+                time.innerText=`${currDate.getHours()%12} : ${currDate.getMinutes()} ${currDate.getHours()>12?'PM':'AM'}`;
+                date.innerText=`${days[currDate.getDay()]} ${months[currDate.getMonth()]} `;
+                date.innerHTML+=`<span class="highlight">${currDate.getDate()}</span>`;
+            },1000);
+            document.querySelector('button').addEventListener('click',function(){
+                if(nightMode){
+                    this.innerText='Night';
+                    this.style.background='rgb(43, 40, 40)';
+                    this.style.color='white';
+                    document.querySelector('.theme_clock').style.background='white';
+
+                }else {
+                    this.innerText='Day';
+                    this.style.background='white';
+                    this.style.color='rgb(43, 40, 40)';
+                    document.querySelector('.theme_clock').style.background='rgb(43, 40, 40)';
+                }
+                time.classList.toggle('clock_dark_mode');
+                date.classList.toggle('clock_dark_mode');
+                nightMode=!nightMode;
+            });
+        }
+    </script>
+</body>
+</html>

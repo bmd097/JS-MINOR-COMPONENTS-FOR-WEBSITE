@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            font-family: 'Open Sans', sans-serif;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+        }
+        .__testimonal_loadbox{
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .__testimonal_loadbox video{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: scale(1.5);
+            opacity: 0.2;
+            top: 0;
+        }
+        .__testimonal{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background: linear-gradient(to right bottom,rgba(0, 110, 255, 0.849),rgba(0, 132, 255, 0.829));
+            padding: 40px;
+            padding-top: 50px;
+            border-radius: 15px;
+            box-shadow: rgba(0, 0, 0, 0.151) 0px 0px 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+        .__loader{
+            width: calc(78/100*750px);
+            height: 5px;
+            border-radius: 5px;
+        }
+        .__loader div{
+            transition: all ease-in-out;
+            height: 100%;
+            background-color: white;
+        }
+        .__main_display{
+            width: 750px;
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0px;
+        }
+        .__main_display h1{
+            width: 10%;
+            display: flex;
+            justify-content: center;
+            color: white;
+            font-size: 55px;
+        }
+        .__main_display p{
+            width: 78%;
+            font-size: 22px;
+            font-family: 'Lato', sans-serif;
+            text-align: justify;
+            color: white;
+        }
+        .__testi_user{
+            display: flex;
+            height: fit-content;
+        }
+        .__testi_user img{
+            border-radius: 50%;
+            height: 80px;
+            width: 80px;
+        }
+        .__testi_info{
+            margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .__testi_info h5{
+            font-size: 27px;
+            color: white;
+        }
+        .__testi_info p{
+            margin: 2px 0px;
+            font-size: 19px;
+            font-family: 'Lato', sans-serif;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <section class="__testimonal_loadbox">
+        <video src="assets/video.mp4" autoplay loop muted></video>
+        <div class="__testimonal">
+            <div class="__loader"><div></div></div>
+            <div class="__main_display">
+                <h1><i class="fa fa-quote-left" aria-hidden="true"></i></h1>
+                <p>I had my concerns that due to a tight deadline this project can't 
+                    be done. But this guy proved me wrong not only he delivered an outstanding
+                     work but he managed to deliver 1 day prior to the deadline. And when I 
+                     asked for some revisions he made them in MINUTES. I'm looking forward 
+                     to work with him again and I totally recommend him. Thanks again!
+                </p>
+                <h1><i class="fa fa-quote-right" aria-hidden="true"></i></h1>
+            </div>
+            <div class="__testi_user">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
+                <div class="__testi_info">
+                    <h5>nnknn</h5>
+                    <p>jjbj</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        {
+            let testimonals=[
+                {
+                    message: `I've worked with literally hundreds of HTML/CSS developers and I have to say the top spot goes to this guy. This guy is an amazing developer. He stresses on good, clean code and pays heed to the details. I love developers who respect each and every aspect of a throughly thought out design and do their best to put it in code. He goes over and beyond and transforms ART into PIXELS - without a glitch, every time.`,
+                    author: `Miyah Myles`,
+                    job:`Marketing`,
+                    pic:`https://randomuser.me/api/portraits/women/68.jpg`
+                },
+                {
+                    message: `This guy is a young and talented IT professional, proactive and responsible, with a strong work ethic. He is very strong in PSD2HTML conversions and HTML/CSS technology. He is a quick learner, eager to learn new technologies. He is focused and has the good dynamics to achieve due dates and outstanding results.`,
+                    author: `June Cha`,
+                    job:`Software Engineer`,
+                    pic:`https://randomuser.me/api/portraits/women/58.jpg`
+                },
+                {
+                    message:`This guy does everything he can to get the job done and done right. This is the second time I've hired him, and I'll hire him again in the future.`,
+                    author: `Jonathan Nunfiez`,
+                    job:`Graphic Designer`,
+                    pic:`https://randomuser.me/api/portraits/men/68.jpg`
+                },
+                {
+                    message:`I had my concerns that due to a tight deadline this project can't be done. But this guy proved me wrong not only he delivered an outstanding work but he managed to deliver 1 day prior to the deadline. And when I asked for some revisions he made them in MINUTES. I'm looking forward to work with him again and I totally recommend him. Thanks again!`,
+                    author: `Sasha Ho`,
+                    job:`Business Administrator`,
+                    pic:`https://randomuser.me/api/portraits/women/48.jpg`
+                }
+            ];
+            let loader=document.querySelector('.__loader div');
+            loader.style.width='0px';
+            let id;
+            let i=0;
+            let testimonalNo=0;
+            let mainMessage=document.querySelector('.__main_display p');
+            let img=document.querySelector('.__testi_user img');
+            let authorInfo=document.querySelector('.__testi_info');
+            function loadTestimonal(i){
+                mainMessage.innerText=testimonals[i]['message'];
+                img.src=testimonals[i]['pic'];
+                authorInfo.innerHTML=`<h5>${testimonals[i]['author']}</h5> <p>${testimonals[i]['job']}</p>`;
+            }
+            loadTestimonal(testimonalNo++);
+            function startProcess(){
+                id=setInterval(()=>{
+                    if(i===(78/100)*750){
+                        clearInterval(id);
+                        i=0;
+                        loadTestimonal(testimonalNo++);
+                        testimonalNo=testimonalNo%testimonals.length;
+                        startProcess();
+                        return;
+                    }
+                    i++;
+                    loader.style.width=i+"px";
+                },20);
+            };
+            startProcess();
+        }
+    </script>
+</body>
+</html>

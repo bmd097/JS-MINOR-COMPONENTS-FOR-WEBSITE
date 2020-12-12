@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        .blurryLoading{
+            width: 100%;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+        .blurryLoading p{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            color: white;
+            transform: translate(-50%,-50%);
+            font-size: 90px;
+        }
+        .blurryLoading ._blur_pic{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            filter: blur(10px);
+            transform: scale(1.2);
+        }
+        .blurryLoading img{
+            width: 100%;
+            height: 100%;
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="blurryLoading">
+        <div class="_blur_pic">
+            <img src="bg.png" alt="">
+        </div>
+        <p>0 %</p>
+    </div>
+    <script>
+        {
+            let speed=80;
+            let count=100;
+            let percentage=document.querySelector('.blurryLoading p');
+            let blurdiv=document.querySelector('._blur_pic');
+            let blurId=setInterval(()=>{
+                if(count===0){
+                    blurdiv.style.filter=`blur(0px)`;
+                    clearInterval(blurId);
+                    percentage.remove();
+                    return;
+                }
+                percentage.innerText=`${100-count} %`;
+                blurdiv.style.filter=`blur(${count/10}px)`;
+                count--;
+            },speed);
+        }
+    </script>
+</body>
+</html>

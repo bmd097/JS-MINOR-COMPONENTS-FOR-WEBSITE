@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .red{
+            width: 250px;
+            height: 250px;
+            background: rgb(255, 169, 169);
+        }
+        .orange{
+            width: 300px;
+            height: 250px;
+            background: rgb(255, 201, 169);
+        }
+        .blue{
+            width: 500px;
+            height: 450px;
+            background: rgb(204, 204, 255);
+        }
+        /* .heartClick{    // Optional
+            position: relative;
+        } */
+    </style>
+
+</head>
+<body>
+    <!-- // this heartClick class is required.... -->
+    <div class="red heartClick">
+        
+    </div>
+    <div class="orange heartClick">
+
+    </div>
+    <div class="blue heartClick">
+
+    </div>
+    <script>
+        {
+            document.querySelectorAll('.heartClick').forEach(heart=>{
+                heart.style.position='relative';
+                let noOfHearts=0;
+                heart.addEventListener('dblclick',(e)=>{
+                    let img=document.createElement('img');
+                    img.src='assets/heart.png';
+                    img.style.position='absolute';
+                    img.style.display="none";
+                    img.style.top=(e.clientY-heart.getBoundingClientRect().top)+"px";
+                    img.style.left=(e.clientX-heart.getBoundingClientRect().left)+"px";
+                    img.style.transform=`translate(-50%,-50%)`;
+                    img.style.userSelect="none";
+                    heart.appendChild(img);
+                    let i=0;
+                    noOfHearts++; // this gives the no of Hearts clicked! 
+                    // use this in your future likes...
+                    let id=setInterval(() => {
+                        if(i==100){
+                            clearInterval(id);
+                            img.remove();
+                            return;
+                        }
+                        img.style.width=i+"px";
+                        img.style.display="block";
+                        img.style.opacity=(100-i)/100;
+                        i++;
+                    },7);
+                });
+            });
+        }
+    </script>
+</body>
+</html>

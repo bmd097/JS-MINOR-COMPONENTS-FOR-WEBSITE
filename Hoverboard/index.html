@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hoverboard{
+            width: 500px;
+            height: 600px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .hoverboard div{
+            background: #1d1d1d;
+            width: 30px;
+            border-radius: 4px;
+            height: 30px;
+            margin: 3px;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="hoverboard"></div>
+    <script>
+        {
+            let colours=[
+                '#fa4a04',
+                '#f7d200',
+                '#8df00c',
+                '#00d9ff',
+                '#0084ff',
+                '#ff00ff',
+                '#e600a1',
+                '#8011ff',
+                '#ff0000',
+                '#ffffff'
+            ];
+            let hoverboard=document.querySelector('.hoverboard');
+            let no=parseInt(hoverboard.getBoundingClientRect().width/30)-2;
+            let noBottom=parseInt(hoverboard.getBoundingClientRect().height/30)-2;
+            let total=no*noBottom-57;
+            for(let i=0;i<total;i++) {
+                let div=document.createElement('div');
+                let id=null;
+                div.addEventListener('mouseover',()=>{
+                    if(id!==null){
+                        clearInterval(id);
+                        id=null;
+                        div.style.background='#1d1d1d';
+                        div.style.boxShadow='none';
+                    }
+                    div.style.background=colours[i%colours.length];
+                    div.style.boxShadow=` ${colours[i%colours.length]} 0px 0px 10px`;
+                });
+                div.addEventListener('mouseout',()=>{
+                    let io=99;
+                    id=setInterval(()=>{
+                        if(io==0){
+                            clearInterval(id);
+                            id=null;
+                            div.style.background='#1d1d1d';
+                            div.style.boxShadow='none';
+                            return;
+                        }
+                        div.style.background=`${colours[i%colours.length]}${io}`;
+                        div.style.boxShadow=` ${colours[i%colours.length]}${io} 0px 0px 8px`;
+                        io--;
+                    },8);
+                });
+                hoverboard.appendChild(div);
+            }
+        }
+    </script>
+</body>
+</html>

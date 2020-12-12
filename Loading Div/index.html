@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        /* /// loading_div styling */
+        .__loading_div{
+            height: 350px;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid lightgray;
+        }
+        .__line{
+            height: 25px;
+            margin: 5px 0px;
+            width: 90%;
+            animation: ___pulse 1s infinite ease-in-out;
+        }
+        @keyframes ___pulse {
+            0%{
+                background-color: rgba(44, 39, 39, 0.11);
+            }
+            50%{
+                background-color: rgba(44, 39, 39, 0.336);
+            }
+            100%{
+                background-color: rgba(44, 39, 39, 0.11);
+            }
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <div class="__loading_div">
+        <div class="__line"></div>
+        <div class="__line"></div>
+        <div class="__line"></div>
+    </div>
+</body>
+</html>

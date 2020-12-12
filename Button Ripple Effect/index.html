@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: rgb(39, 37, 37);
+            justify-content: center;
+            align-items: center;
+        }
+        .btn-ripple{
+            font-size: 18px;
+            padding: 15px 20px;
+            outline: none;
+            overflow: hidden;
+            cursor: default;
+            color: white;
+            border: none;
+            position: relative;
+            border-radius: 6px;
+            background: rgb(0, 157, 248);
+            transition: ease-in-out all 0.2s;
+        }
+        .btn-ripple div{
+            background: rgb(255, 255, 255);
+            border-radius: 50%;
+            position: absolute;
+            transition: all ease-in-out;
+            transform: translate(-50%,-50%);
+        }
+        .btn-ripple:active{
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="btn-ripple">CLICK ME</div>
+    <div class="btn-ripple">CLICK ME</div>
+
+    <p>hvhvhvhhhv</p>
+    <div class="btn-ripple">CLICK ME</div>
+    
+
+    <script>
+        {
+            let buttons=document.querySelectorAll('.btn-ripple');
+            buttons.forEach(button=>{
+                button.addEventListener('click',(e)=>{
+                    let div=document.createElement('div');
+                    div.style.top=(e.clientY-button.getBoundingClientRect().top)+"px";
+                    div.style.left=(e.clientX-button.getBoundingClientRect().left)+"px";
+                    button.appendChild(div);
+                    let i=0;
+                    let time=150;
+                    let id=setInterval(()=>{
+                        if(i==time){
+                            div.remove();
+                            clearInterval(id);
+                            return;
+                        }
+                        div.style.width=i+"px";
+                        div.style.height=i+"px";
+                        div.style.opacity=((time-i)/100);
+                        i+=2;
+                    },6);
+                });
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .__countdown_animate{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .__countdown_animate h4{
+            font-size: 25px;
+        }
+        .__toanimate{
+            font-size: 0px;
+            opacity: 0;
+            transition: all ease-in-out 0.8s;
+        }
+        .__animate{
+            opacity: 1;
+            font-size: 150px;
+            color: rgb(0, 153, 255);
+        }
+        .__remove_animate{
+            opacity: 0;
+            transition: all ease-in-out 0.1s;
+            font-size: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="__countdown_animate">
+        <h4>GET READY</h4>
+    </div>
+    <script>
+        {
+            let displayCount=document.querySelector('.__countdown_animate');
+            let count=10;
+            let prev=null;
+            // <p class="toanimate animate">5</p>
+            let id=setInterval(()=>{
+                if(count===-1){
+                    clearInterval(id);
+                    displayCount.innerHTML=`<h4>LET'S GO!</h4>`;
+                    action();
+                    return;
+                }
+                let p=document.createElement('p');
+                p.innerText=count;
+                p.classList.add('__toanimate');
+                if(count!=10){
+                    prev.remove();
+                }
+                prev=p;
+                displayCount.insertBefore(p,displayCount.children[0]);
+                setTimeout(()=>{
+                    p.classList.add('__animate');
+                },100);
+                setTimeout(()=>{
+                    p.classList.add('__remove_animate');
+                },900)
+                count--;
+            },1000);
+            function action(){
+                console.log('running');
+            }
+        }
+    </script>
+</body>
+</html>

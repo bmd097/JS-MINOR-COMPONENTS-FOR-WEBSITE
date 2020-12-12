@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .__img_carousel{
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90%;
+        }
+        .__img_carousel .__display{
+            width: 99%;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            height: 83%;
+        }
+        .__img_carousel .__display div{
+            width: 100%;
+            transition: all ease-in-out 0.3s;
+            height: 100%;
+            position: absolute;
+        }
+        .__img_carousel .__display div img{
+            width: 100%;
+            height: 100%;
+        }
+        .__img_card_1{
+            left: 0;
+            background: tomato;
+        }
+        .__img_card_1_active{
+            left: -100%;
+        }
+        .__img_card_1_active_right{
+            left: 100%;
+        }
+        .__img_card_2{
+            left: 100%;
+        }
+        .__img_card_2_active{
+            left: 0;
+        }
+        .__img_card_2_right{
+            left: -100%;
+        }
+        .__img_card_2_active_right{
+            left: 0;
+        }
+        .__controls{
+            width: 100%;
+            height: 15%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .__controls p{
+            width: 49.4%;
+            height: 85%;
+            display: flex;
+            color: white;
+            user-select: none;
+            font-size: 25px;
+            transition: all ease-in-out 0.2s;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+        }
+        .__controls p:nth-of-type(1){
+            background: linear-gradient(to right bottom, rgb(0, 174, 255),rgb(0, 204, 255));
+        }
+        .__controls p:nth-of-type(2){
+            background: linear-gradient(to right bottom, rgb(255, 0, 157),rgb(255, 0, 200));
+        }
+        .__controls p:active{
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="__img_carousel">
+        <div class="__display">
+            <div class="__img_card_1"><img src=""></div>
+        </div>
+        <div class="__controls">
+            <p>PREV</p>
+            <p>NEXT</p>
+        </div>
+    </div>
+    <script>
+        {
+            let imgUrls=[
+                'pic1.jpg',
+                'pic2.jpg',
+                'pic3.jpg',
+                'pic4.jpg',
+                'pic5.jpg'
+            ];
+            // <div class="img_card_2"></div>
+            let cardImg1=document.querySelector('.__img_card_1 img');
+            cardImg1.src=imgUrls[3];
+            let display=document.querySelector('.__display');
+            display.innerHTML+=`<div class="__img_card_2 __img_card_2_active"><img src=${imgUrls[0]}></div>`;
+            display.innerHTML+=`<div class="__img_card_2_right __img_card_2_active_right"><img src=${imgUrls[0]}></div>`;
+            let i=0;
+            let controls=document.querySelector('.__controls');
+
+            controls.children[0].addEventListener('click',()=>{
+                display.innerHTML='';
+                console.log(i);
+                display.innerHTML=`<div class="__img_card_1"><img src=${imgUrls[i]} alt=""></div>`;
+                i--;
+                if(i==-1) i=imgUrls.length-1;
+                console.log(i);
+                display.innerHTML+=`<div class="__img_card_2_right"><img src=${imgUrls[i]}></div>`;
+                setTimeout(()=>{
+                    display.children[0].classList.add('__img_card_1_active_right');
+                    display.children[1].classList.add('__img_card_2_active_right');
+                },0);
+            });
+
+            controls.children[1].addEventListener('click',()=>{
+                display.innerHTML='';
+                console.log(i);
+                display.innerHTML=`<div class="__img_card_1"><img src=${imgUrls[i]} alt=""></div>`;
+                i++;
+                if(i==imgUrls.length) i=0;
+                console.log(i);
+                display.innerHTML+=`<div class="__img_card_2"><img src=${imgUrls[i]}></div>`;
+                setTimeout(()=>{
+                    display.children[0].classList.add('__img_card_1_active');
+                    display.children[1].classList.add('__img_card_2_active');
+                },0);
+            });
+        }
+    </script>
+</body>
+</html>

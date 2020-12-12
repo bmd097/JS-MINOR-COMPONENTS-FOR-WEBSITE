@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;  
+        }
+        .split_landing_page{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+        }
+        .split_landing_page>div{
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            transition: all ease-in-out 0.5s;
+            justify-content: center;
+            align-items: center;
+        }
+        .split_landing_page>div p{
+            font-size: 70px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        .split_landing_page>div a{
+            padding: 25px;
+            font-size: 30px;
+            text-decoration: none;
+            color: white;
+            transition: all ease-in-out 0.2s;
+            border: solid white 3px;
+        }
+        .split_landing_page>div a:active{
+            transform: scale(0.94);
+        }
+    </style>
+</head>
+<body>
+    <section class="split_landing_page">
+        <div class="split_left_part">
+            <p>XBOX Series X</p>
+            <a href="#">BUY NOW</a>
+        </div>
+        <div class="split_right_part">
+            <p>Playstation 5</p>
+            <a href="#">BUY NOW</a>
+        </div>
+    </section>
+    <script>
+        {
+            let left=document.querySelector('.split_left_part');
+            let right=document.querySelector('.split_right_part');
+            left.style.background=`url(./assets/Xbox.jpg) center no-repeat`;
+            left.style.backgroundSize='auto 100%';
+            right.style.background=`url(./assets/playstation5.jpg) center no-repeat`;
+            right.style.backgroundSize='auto 100%';
+            left.addEventListener('mouseover',()=>{
+                left.style.width="70%";
+                right.style.width="30%";
+            });
+            right.addEventListener('mouseover',()=>{
+                right.style.width="70%";
+                left.style.width="30%";
+            });
+            let buttons=document.querySelectorAll('.split_landing_page>div a');
+            buttons[0].addEventListener('mouseover',function(){
+                this.style.background='rgba(0, 175, 0, 0.82)';
+                this.style.border='solid rgba(0, 175, 0, 0.70) 3px';
+            });
+            buttons[0].addEventListener('mouseout',function(){
+                this.style.background='transparent';
+                this.style.border='solid white 3px';
+            });
+            // rgba(0, 102, 255, 0.80);
+            buttons[1].addEventListener('mouseover',function(){
+                this.style.background='rgba(0, 101, 255, 0.80)';
+                this.style.border='solid rgba(0, 101, 255, 0.80) 3px';
+            });
+            buttons[1].addEventListener('mouseout',function(){
+                this.style.background='transparent';
+                this.style.border='solid white 3px';
+            });
+        }
+    </script>
+</body>
+</html>

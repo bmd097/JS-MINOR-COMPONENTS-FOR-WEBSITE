@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            background: rgb(228, 228, 228);
+            justify-content: center;
+            align-items: center;
+        }
+        body>h1{
+            font-size: 20px;
+            padding: 20px 24px;
+            background: rgb(248, 248, 248);
+            border: 1.5px solid rgb(56, 53, 53);
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 5px;
+        }
+        .display{
+            width: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 30px;
+            display: none;
+        }
+        .display h1{
+            font-size: 18px;
+            color: rgb(66, 66, 66);
+            margin-bottom: 5px;
+        }
+        .display div{
+            width: 100%;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            border: 1.5px solid rgb(56, 53, 53);
+            background: rgb(248, 248, 248);
+            border-radius: 4px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Press any key to get the keycode.</h1>
+    <div class="display">
+        <h1>event.key</h1>
+        <div id="key"></div>
+    </div>
+    <div class="display">
+        <h1>event.keyCode</h1>
+        <div id="keyCode"></div>
+    </div>
+    <div class="display">
+        <h1>event.code</h1>
+        <div id="code"></div>
+    </div>
+    <script>
+        {
+            let key=document.getElementById('key');
+            let keyCode=document.getElementById('keyCode');
+            let code=document.getElementById('code');
+            let check=true;
+            document.addEventListener('keydown',(e)=>{
+                if(check){
+                    document.querySelectorAll('.display').forEach(ele=>{
+                        ele.style.display='flex';
+                    });
+                    document.querySelector('h1').style.display='none';
+                    check=!check;
+                }
+                key.innerText=e.key;
+                keyCode.innerText=e.keyCode;
+                code.innerText=e.code;
+            });
+        }
+    </script>
+</body>
+</html>

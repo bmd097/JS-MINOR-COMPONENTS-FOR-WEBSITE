@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background: rgb(238, 238, 238);
+        }
+        .__live_user{
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            width: 300px;
+            box-shadow: rgba(0, 0, 0, 0.164) 0px 0px 100px;
+            overflow: hidden;
+        }
+        .__search_box{
+            width: 100%;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgb(0, 89, 255);
+        }
+        .__search_box input{
+            width: 80%;
+            padding: 10px 18px;
+            font-size: 20px;
+            color: white;
+            background: rgb(44, 44, 255);
+            outline: none;
+            border: none;
+            border-radius: 50px;
+        }
+        .__search_box input::placeholder{
+            color: rgb(223, 223, 223);
+        }
+        .__search_box_text{
+            width: 100%;
+            height: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .__search_box_text h1{
+            color: white;
+            font-size: 30px;
+        }
+        .__search_box_text p{
+            color: white;
+            font-size: 15.3px;
+            margin-top: 3px;
+        }
+        .__live_display{
+            width: 100%;
+            overflow: hidden;
+            transition: all ease-in-out 0.3s;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+        .__live_search_data{
+            height: 80px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .__live_search_data img{
+            height: 80%;
+            margin-left: 5px;
+            border-radius: 50%;
+        }
+        .__live_search_data div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 8px;
+        }
+        .__live_search_data div h1{
+            font-size: 20px;
+        }
+        .__live_search_data div p{
+            font-size: 14px;
+            color: rgb(85, 76, 76);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="__live_user">
+        <div class="__search_box">
+            <div class="__search_box_text">
+                <h1>Live User Filter</h1>
+                <p>Search by name and/or location</p>
+            </div>
+            <input type="text" placeholder="Search">
+        </div>
+        <div class="__live_display"></div>
+    </div>
+
+    <script>
+        {
+            let displayLive=document.querySelector('.__live_display');
+            displayLive.innerHTML="";
+            let input=document.querySelector('.__search_box input');
+            let liveResults;
+            function fetcher(){
+                fetch('https://randomuser.me/api?results=50')
+                .then(response=>response.json())
+                .then(data=>{
+                    liveResults=data['results'];
+                    addResults(liveResults);
+                });
+            }
+            function addResults(datas){
+                displayLive.innerHTML="";
+                datas.forEach(e => {
+                    displayLive.innerHTML+=`
+                    <div class="__live_search_data">
+                        <img src=${e['picture']['large']}>
+                        <div>
+                            <h1>${e['name']['first']} ${e['name']['last']}</h1>
+                            <p>${e['location']['city']}, ${e['location']['country']}</p>
+                        </div>
+                    </div>
+                    `;
+                });
+            }
+            input.addEventListener('input',(e)=>{
+                let searchResults=liveResults.filter(e=>{
+                    return e['name']['first'].toLowerCase().includes(input.value.toLowerCase()) ||
+                           e['name']['last'].toLowerCase().includes(input.value.toLowerCase()) ||
+                           e['location']['city'].toLowerCase().includes(input.value.toLowerCase()) ||
+                           e['location']['country'].toLowerCase().includes(input.value.toLowerCase());
+                });
+                addResults(searchResults);
+            });
+            fetcher();
+        }
+    </script>
+</body>
+</html>
