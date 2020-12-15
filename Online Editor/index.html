@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            font-family: 20px;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+        }
+        section{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+        }
+        .editor{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 40%;
+        }
+        .editor h1{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 8%;
+            font-size: 25px;
+        }
+        .editor textarea{
+            width: 100%;
+            padding: 10px;
+            font-size: 24px;
+            outline: none;
+            border: 2px solid rgba(94, 85, 85, 0.171);
+            border-radius: 5px;
+            height: 92%;
+        }
+        .editor textarea::-webkit-scrollbar{
+            display: none;
+        }
+        .editor-display{
+            width: 58%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .editor-display h1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 25px;
+            width: 100%;
+            height: 8%;
+        }
+        iframe{
+            width: 100%;
+            height: 92%;
+            outline: none;
+            border: none;
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+        <div class="editor">
+            <h1>WEB EDITOR</h1>
+            <textarea cols="10" rows="20"></textarea>
+        </div>
+        <div class="editor-display">
+            <h1>DISPLAY</h1>
+            <iframe id="iframe-0"></iframe>
+        </div>
+    </section>
+    <script>
+        {
+            let display=document.getElementById('iframe-0');
+            document.querySelector('.editor textarea').addEventListener('keyup',e=>{
+                display.srcdoc=e.target.value;
+            });
+        }
+    </script>
+</body>
+</html>
