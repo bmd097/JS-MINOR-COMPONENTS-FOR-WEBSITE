@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            font-size: 25px;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .card{
+            width: 350px;
+            height: 500px;
+            border-radius: 5px;
+            box-shadow: rgba(43, 41, 41, 0.205) 0px 0px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+        }        
+        .card-title{
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 20%;
+        }
+        .card-display{
+            width: 100%;
+            height: 60%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+        }
+        .card-display div{
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 20%;
+        }
+        .card-display div:nth-of-type(1){
+            width: 20%;
+            border-radius: 50%;
+        }
+        .card-sign{
+            width: 80%;
+            height: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .loading{
+            position: relative;
+            overflow: hidden;
+        }
+        .loading::after{
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,transparent,rgba(0, 0, 0, 0.2),transparent);
+            animation: loadingSkeleton 0.7s infinite ease;
+            top: 0;
+            left: 0;
+        }
+        @keyframes loadingSkeleton{
+            0%{
+                transform: translateX(-100%);
+            }
+            100%{
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-title loading"></div>
+        <div class="card-display">
+            <div class="loading"></div>
+            <div class="loading"></div>
+            <div class="loading"></div>
+            <div class="loading"></div>
+        </div>
+        <div class="card-sign loading"></div>
+    </div>
+    <div class="card">
+        <div class="card-title loading"></div>
+        <div class="card-display">
+            <div class="loading"></div>
+            <div class="loading"></div>
+            <div class="loading"></div>
+            <div class="loading"></div>
+        </div>
+        <div class="card-sign loading"></div>
+    </div>
+    <div class="card">
+        <div class="card-title loading"></div>
+        <div class="card-display">
+            <div class="loading"></div>
+            <div class="loading"></div>
+            <div class="loading"></div>
+            <div class="loading"></div>
+        </div>
+        <div class="card-sign loading"></div>
+    </div>
+    <script>
+        {
+            let cards=document.querySelectorAll('.card');
+            setTimeout(()=>{
+                cards.forEach(card=>{
+                    card.children[0].classList.remove('loading');
+                    card.children[0].innerText="TITLE HERE";
+                });
+            },3000);
+            setTimeout(()=>{
+                cards.forEach(card=>{
+                    card.children[2].classList.remove('loading');
+                    card.children[2].innerText="SIGN HERE";
+                });
+            },4000);
+            setTimeout(()=>{
+                cards.forEach(card=>{
+                    card.children[1].children[0].innerText='$';
+                    card.children[1].children[0].classList.remove('loading');
+                });
+            },5000);
+            setTimeout(()=>{
+                cards.forEach(card=>{
+                    card.children[1].children[1].innerText='NAME';
+                    card.children[1].children[1].classList.remove('loading');
+                    card.children[1].children[2].innerText='EMAIL';
+                    card.children[1].children[2].classList.remove('loading');
+                    card.children[1].children[3].innerText='ADRESS';
+                    card.children[1].children[3].classList.remove('loading');
+                });
+            },6000);
+        }
+    </script>
+</body>
+</html>
